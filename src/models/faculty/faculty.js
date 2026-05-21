@@ -80,7 +80,7 @@ const getFacultyById = (facultyId) => {
 
 const getSortedFaculty = (sortBy) => {
     // TODO: Validate sortBy parameter (name, department, or title), default to 'name' if invalid
-
+    
     // Create an array of all faculty members
     const facultyArray = [];
     for (const key in faculty) {
