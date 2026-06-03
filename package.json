@@ -13,12 +13,13 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.0.9",
+      "version": "11.3.0",
       "onFail": "download"
     }
   },
   "type": "module",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "pg": "^8.21.0"

@@ -5,7 +5,7 @@
      <p>Welcome to the Course Catalog!</p>
     <ul>
         <% courses.forEach(course => { %>
-            <li><a href="/courses/<%= course.id %>"><%= course.title %></a></li>
+            <li><a href="/catalog/<%= course.slug %>"><%= course.courseCode %> - <%= course.name %></a></li>
         <% }) %>
     </ul>
 </main>
