@@ -28,7 +28,9 @@ router.use('/contact', (req, res, next) => {
 import { addDemoHeaders } from '../middleware/demo/headers.js';
 import { catalogPage, courseDetailPage } from '../controllers/catalog/catalog.js';
 import { homePage, aboutPage, demoPage, testErrorPage } from '../controllers/index.js';
-import {facultyListPage, facultyDetailPage} from '../controllers/faculty/faculty.js'
+import {facultyListPage, facultyDetailPage} from '../controllers/faculty/faculty.js';
+
+import contactRouter from '../controllers/forms/contact.js';
 
 // TODO: Add route definitions
 router.get('/', homePage);
@@ -44,5 +46,8 @@ router.get('/test-error', testErrorPage);
 //Route to the facility and facility details
 router.get('/faculty', facultyListPage);
 router.get('/faculty/:facultySlug', facultyDetailPage);
+
+// Contact form routes
+router.use('/contact', contactRouter);
 
 export default router;
