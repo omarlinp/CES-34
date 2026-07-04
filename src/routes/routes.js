@@ -18,6 +18,11 @@ router.use('/faculty', (req, res, next) => {
     next();
 });
 
+// Add contact-specific styles to all contact routes
+router.use('/contact', (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/contact.css">');
+    next();
+});
 
 // TODO: Add import statements for controllers and middleware
 import { addDemoHeaders } from '../middleware/demo/headers.js';
