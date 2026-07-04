@@ -7,6 +7,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
+ * Ensures the practice database tables exist by running practice.sql.
+ * This is separate from the main seed so assignment tables like contact_form
+ * are created even when the catalog seed is already present.
+ */
+const ensurePracticeTables = async () => {
+    const practicePath = join(__dirname, 'sql', 'practice.sql');
+    if (!fs.existsSync(practicePath)) {
+        return;
+    }
+
+    const practiceSQL = fs.readFileSync(practicePath, 'utf8');
+    await db.query(practiceSQL);
+    console.log('Practice database tables initialized');
+};
+
+/**
  * Sets up the database by running the seed.sql file if needed.
  * Checks if faculty table has data - if not, runs a full re-seed.
  */
@@ -31,15 +47,16 @@ const setupDatabase = async () => {
     
     if (hasData) {
         console.log('Database already seeded');
-        return true;
+    } else {
+        // No faculty found - run full seed
+        console.log('Seeding database...');
+        const seedPath = join(__dirname, 'sql', 'seed.sql');
+        const seedSQL = fs.readFileSync(seedPath, 'utf8');
+        await db.query(seedSQL);
+        console.log('Database seeded successfully');
     }
-    
-    // No faculty found - run full seed
-    console.log('Seeding database...');
-    const seedPath = join(__dirname, 'sql', 'seed.sql');
-    const seedSQL = fs.readFileSync(seedPath, 'utf8');
-    await db.query(seedSQL);
-    console.log('Database seeded successfully');
+
+    await ensurePracticeTables();
     
     return true;
 };

@@ -30,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
+// Allow Express to receive and process POST data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 /**
  * Global Middleware
  */
@@ -110,5 +113,5 @@ if (NODE_ENV.includes('dev')) {
 app.listen(PORT, async () => {
     await setupDatabase();
     await testConnection();
-    console.log(`Server is running on http://127.0.0.1:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
